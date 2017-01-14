@@ -146,9 +146,14 @@ unsigned int size(void)
 /**
  * Unloads dictionary from memory. Returns true if successful else false.
  */
-void delete_trie(struct letter* Letter)
+bool delete_trie(struct letter* Letter)
 {
-   
+    // check the existence of Letter struct
+    if (Letter == NULL)
+    {
+        return false;
+    }
+    
     // recursive step
     int i;
     for (i = 0; i < 27; i++)
@@ -163,12 +168,10 @@ void delete_trie(struct letter* Letter)
     // termination step
     free_trie(Letter);
     Letter = NULL;
-    return;
+    return true;
 }
 
 bool unload(void)
 {
-
-    delete_trie(root);
-    return true;
+    return delete_trie(root);
 }

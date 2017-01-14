@@ -1,7 +1,19 @@
-0.  TODO
-1.  TODO
-2.  TODO
-3.  TODO
-4.  TODO
-5.  TODO
-6.  TODO
+0.  It is the largest English word that refers to a lung disease.
+
+1.  Getrusage returns usage measures for different processes.
+
+2.  As per the man page there are 16 members in a variable of type struct rusage.
+
+3.  Because the struct that a and b point to may exist or not exist, while these pointers are sure to exist and will point to NULL 
+    in such a situation making it easy for us to check the existence of the actual structs.
+    
+4.  The main function reads from the file character by character until EOF(end of file is reached). After reading the letter it
+    decides whether it is a part of same word or next word has begun. It does is simply by putting all the alphanumeric characters
+    and apostrophe sign into one word and ending the word when any other character is encountered.
+    
+5.  fscanf would not stop until a space or \n is encounterd. Here we wanted to exclude other characters also like (.), (,) etc.
+    and in the former case we would also have had to scan the string again character by character to get information about these
+    other characters, hence the latter way makes our task much easier.
+    
+6.  So that the function can't make any changes to the variables that we passed by reference and just uses the information it can
+    extract from them.
