@@ -47,6 +47,7 @@ bool check(const char *word)
 /**
  * Loads dictionary into memory. Returns true if successful else false.
  */
+struct letter *root = NULL;
 bool load(const char *dictionary)
 {
     // try to open dictionary
@@ -57,7 +58,7 @@ bool load(const char *dictionary)
         return false;
     }
     
-    struct letter *root = create_trie();
+    root = create_trie();
     char word[LENGTH + 1];
     while (fscanf(fp, "%s", word) != EOF)
     {
@@ -78,8 +79,29 @@ unsigned int size(void)
 /**
  * Unloads dictionary from memory. Returns true if successful else false.
  */
+void delete_trie(struct letter* Letter)
+{
+   
+    // recursive step
+    int i;
+    for (i = 0; i < 27; i++)
+    {
+        if (Letter->arr[i] != NULL)
+        {
+            delete_trie(Letter->arr[i]);
+            Letter->arr[i] = NULL;
+        }
+    }
+    
+    // termination step
+    free_trie(Letter);
+    Letter = NULL;
+    return;
+}
+
 bool unload(void)
 {
-    // TODO
-    return false;
+
+    delete_trie(root);
+    return true;
 }
