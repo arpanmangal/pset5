@@ -15,6 +15,7 @@ struct letter* create_trie()
     {
         trie->arr[i] = NULL;
     }
+    trie->is_word = 0;
     return trie;
 }
 
