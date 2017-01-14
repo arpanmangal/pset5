@@ -5,10 +5,45 @@
 #include <stdbool.h>
 
 #include "dictionary.h"
-#include "trie.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <malloc.h>
+
+
+// implementation of trie data structure as suggested in the walkthrough
+//struct letter;
+struct letter
+{
+    int is_word;
+    struct letter* arr[27];
+};
+
+
+// Creating a trie
+struct letter* create_trie()
+{
+    struct letter* trie = (struct letter*) malloc(sizeof(struct letter));
+    
+    // initialises all pointers
+    int i;
+    for(i = 0; i < 27; i++)
+    {
+        trie->arr[i] = NULL;
+    }
+    trie->is_word = 0;
+    return trie;
+}
+
+
+
+// Deleting a trie
+void free_trie(struct letter* trie)
+{
+    free(trie);
+}
+
+
 
 // begining of structure
 struct letter *root = NULL;
