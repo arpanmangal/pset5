@@ -8,7 +8,10 @@
 #include "trie.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
+// begining of structure
+struct letter *root = NULL;
 
 /**
  * Adds the word in the dictionary structure using recursion
@@ -38,16 +41,45 @@ void add_word(struct letter* Letter, char* word)
 /**
  * Returns true if word is in dictionary else false.
  */
+
 bool check(const char *word)
 {
-    // TODO
+    struct letter* cursor = root;
+    
+    int index;
+    for(index = 0; word[index] != '\0'; index++)
+    {
+        // make case insensitive
+        char lettr = tolower(word[index]);
+        int i = (lettr == '\'') ? 26 : lettr - 'a';
+        
+        // if the word ends
+        if (word[index + 1] == '\0')
+        {
+            if (cursor->arr[i] != NULL && cursor->arr[i]->is_word == 1)
+            {
+                return true;
+            }
+            return false;
+        }
+        
+        // no further letters in the structure
+        if (cursor->arr[i] == NULL)
+        {
+            return false;
+        }
+        
+        // check next letter
+        cursor = cursor->arr[i];
+    }
     return false;
 }
+
+int num_of_words = 0;
 
 /**
  * Loads dictionary into memory. Returns true if successful else false.
  */
-struct letter *root = NULL;
 bool load(const char *dictionary)
 {
     // try to open dictionary
@@ -62,6 +94,7 @@ bool load(const char *dictionary)
     char word[LENGTH + 1];
     while (fscanf(fp, "%s", word) != EOF)
     {
+        num_of_words++;
         add_word(root, word);
     }
     return true;
@@ -72,8 +105,7 @@ bool load(const char *dictionary)
  */
 unsigned int size(void)
 {
-    // TODO
-    return 0;
+    return num_of_words;
 }
 
 /**
