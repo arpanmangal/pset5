@@ -5,6 +5,7 @@
 #include <stdbool.h>
 
 #include "dictionary.h"
+#include "trie.h"
 
 /**
  * Returns true if word is in dictionary else false.
